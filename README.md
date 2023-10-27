@@ -7,23 +7,23 @@ The dataset from [data.world](https://data.world/dataman-udit/us-regional-sales-
 Microsoft SQL Server Management Studio, String, Date, Math/Numeric, Aggregate & Window Functions, Subqueries, CTEs.
 ## Data Cleaning:
 ```sql
--- Display dataset
+-- Preview dataset
 select * from sales_data;
 
--- Check for Nulls
+-- Null Values = 0
 select
 	count(*) as Nulls
 from sales_data
 where OrderNumber is null;
 
--- Show Duplicate Rows
+-- No Duplicate Rows
 select * from (
 		select	*,
 				row_number() over (partition by OrderNumber order by OrderNumber) as rn
 		from sales_data) x
 where x.rn > 1;
 
--- Delete Duplicates
+-- Delete Duplicates if they exist
 delete from sales_data
 where OrderNumber in (
 		select OrderNumber from (
@@ -32,56 +32,44 @@ where OrderNumber in (
 			from sales_data) x
 		where x.rn > 1);
 ```
-The data has no null entries. No duplicates too.
+There are no null entries and no duplicates.
 ## Data Exploration:
 ```sql
--- Total Orders
+-- Total Orders = 7991
 select
 	count(distinct(OrderNumber))  as total_orders
 from sales_data;
 
--- Total Customers
+-- Total Customers = 50
 select
 	count(distinct(_CustomerID))  as total_customers
 from sales_data;
 
--- Total Revenue and Total Profit
+-- Total Revenue = $73,143,380 and Total Profit = $27,291,402
 select
 	format(round(sum([Unit Price] * (1 - [Discount Applied]) * [Order Quantity]), 0), 'C') as total_revenue,
 	format(round(sum(([Unit Price] - [Unit Cost]) * (1 - [Discount Applied]) * [Order Quantity]), 0), 'C') as total_profit
 from sales_data;
 
--- Minimum and Maximum Order Dates
+-- Minimum Oder Date = 2018-05-31 and Maximum Order Date = 2020-12-30
 select  
 	min(OrderDate) as min_order_date,
 	max(OrderDate) as max_order_date
 from sales_data;
 
--- Total Products
+-- Total Number of Distinct Products = 47
 select
 	count(distinct(_ProductID)) as total_products
 from sales_data;
 
--- Sales Channels
+-- Sales Channels ---> -- Online, Wholesale, Distributor, In-Store
 select
 	distinct "Sales Channel"
 from sales_data;
 ```
-- 7991 total orders
--	Total of 50 customers
--	$73,143,380 in revenue
--	$27,291,402 in profits
--	May 31st 2018 was the first order date
--	December 30th 2020 was the last order date
--	47 product types were sold
--	There are 4 Sales Channels;
-    -	Online
-    -	Wholesale
-    -	Distributor
-    -	In-Store
 ## RFM Analysis:
 ```sql
--- Create a View using a CTE to get RFM Scores
+-- Create a View with a CTE to get RFM Scores
 create view  VWrfm_scores as 
 	with CTErfm_scores as (
 			select
@@ -105,10 +93,9 @@ create view  VWrfm_scores as
 			ntile(5) over (order by monetary_score asc) as M
 		from CTErfm_scores;
 
--- Display View VWrfm_scores
+--Show View VWrfm_scores
 select * from VWrfm_scores;
-```
-```sql
+
 -- RFM Customer Segmentation
 create view VWrfm_segments as
 	with CTEavg_rfm_scores as (
@@ -128,7 +115,7 @@ create view VWrfm_segments as
 					end as rfm_segment
 			from CTEavg_rfm_scores;
 
--- Display View VWrfm_segments
+-- Show View VWrfm_segments
 select * from VWrfm_segments;
 ```
 ```sql
@@ -157,6 +144,6 @@ where M=5
 order by monetary_score desc;
 ```
 ## Insights:
-- 70% of our customers make up the average, valuable and most valuable rfm categories. 8% are considered 'at risk' customers.
-- We have 7 highly esteemed customers with Recency, Frequency, and Monetary designation of 4 and 5. These customers should never be lost.
-- Our most profitable customers with Monetary designation of 5 happen to be the most loyal (frequent) with F designation between 3 and 5.
+1. 70% of our customers make up the average, valuable and most valuable rfm categories. 8% are considered 'at risk' customers.
+2. We have 7 highly esteemed customers with Recency, Frequency, and Monetary designation of 4 and 5. These customers should never be lost.
+3. Our most profitable customers with Monetary designation of 5 happen to be the most loyal (frequent) with F designation between 3 and 5.
