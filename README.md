@@ -1,4 +1,4 @@
-# Recency Frequency and Monetary (RFM) Analysis
+# Recency, Frequency, and Monetary (RFM) Analysis
 ## Tools and Skills:
 Microsoft SQL Server Management Studio, String, Date, Math/Numeric, Aggregate & Window Functions, Subqueries, CTEs.
 ## Objective:
