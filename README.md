@@ -1,11 +1,11 @@
 # Recency, Frequency, and Monetary (RFM) Analysis
-## Project Overview:
+### Project Overview:
 This data analysis project seeks to segment customers base on their latest transaction dates, the rate of transactions, and their profitability to the business. The major concern is to gain actionable insights into the customer base to know the most profitable, loyal and most recent customers to enhance marketing and customer relationship strategies.
-## Data Source:
+### Data Source:
 The dataset from [data.world](https://data.world/dataman-udit/us-regional-sales-data) is an excel file for US regional sales for orders between year 2018 and 2020. It has 7,991 entries and 16 features that include Order Number, Sales Channel, Order Date, Customer ID, Order Quantity, Discount Applied, Unit Price, and Unit Cost.
-## Tools and Skills:
+### Tools and Skills:
 Microsoft SQL Server Management Studio, String, Date, Math/Numeric, Aggregate & Window Functions, Subqueries, CTEs.
-## Data Cleaning:
+### Data Cleaning:
 ```sql
 -- Preview dataset
 select * from sales_data;
@@ -33,7 +33,7 @@ where OrderNumber in (
 		where x.rn > 1);
 ```
 There are no null entries and no duplicates.
-## Data Exploration:
+### Data Exploration:
 ```sql
 -- Total Orders = 7991
 select
@@ -67,7 +67,7 @@ select
 	distinct "Sales Channel"
 from sales_data;
 ```
-## RFM Analysis:
+### RFM Analysis:
 ```sql
 -- Create a View with a CTE to get RFM Scores
 create view  VWrfm_scores as 
@@ -95,7 +95,8 @@ create view  VWrfm_scores as
 
 --Show View VWrfm_scores
 select * from VWrfm_scores;
-
+```
+```sql
 -- RFM Customer Segmentation
 create view VWrfm_segments as
 	with CTEavg_rfm_scores as (
