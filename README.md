@@ -6,7 +6,7 @@ This data analysis project seeks to segment customers base on their latest trans
 ### Data Source:
 The dataset from [data.world](https://data.world/dataman-udit/us-regional-sales-data) is an excel file for US regional sales for orders between year 2018 and 2020. It has 7,991 entries and 16 features that include Order Number, Sales Channel, Order Date, Customer ID, Order Quantity, Discount Applied, Unit Price, and Unit Cost.
 ### Tools and Skills:
-Microsoft SQL Server Management Studio, String, Date, Math/Numeric, Aggregate & Window Functions, Subqueries, CTEs.
+Microsoft SQL Server Management Studio, String, Date, Math/Numeric, Aggregate & Window Functions, Subqueries, CTEs, Views.
 ### Data Cleaning:
 ```sql
 -- Preview dataset
