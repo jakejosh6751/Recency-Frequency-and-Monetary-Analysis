@@ -127,7 +127,7 @@ select * from VWrfm_segments;
 ![VWrfm_segments](https://github.com/jakejosh6751/Recency-Frequency-and-Monetary-Analysis/assets/148710647/76b7cba6-a548-490b-99a8-9e4c757a23f5)
 
 ```sql
--- Get customer counts and percentage for different categories of segmentation
+-- Get customer counts and percentages for different categories of segmentation
 select 
 	rfm_segment,
 	count(customer_id)  as customer_count,
