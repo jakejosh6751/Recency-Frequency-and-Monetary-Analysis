@@ -9,7 +9,9 @@ Microsoft SQL Server Management Studio, String, Date, Math/Numeric, Aggregate & 
 ```sql
 -- Preview dataset
 select * from sales_data;
-
+```
+![dataset](https://github.com/jakejosh6751/Recency-Frequency-and-Monetary-Analysis/assets/148710647/da7e2ac4-a825-4aff-aa07-433427367193)
+```sql
 -- Null Values = 0
 select
 	count(*) as Nulls
@@ -69,7 +71,7 @@ from sales_data;
 ```
 ### RFM Analysis:
 ```sql
--- Create a View with a CTE to get RFM Scores
+-- Create a View to get RFM Scores
 create view  VWrfm_scores as 
 	with CTErfm_scores as (
 			select
@@ -96,8 +98,10 @@ create view  VWrfm_scores as
 --Show View VWrfm_scores
 select * from VWrfm_scores;
 ```
+![VWrfm_scores](https://github.com/jakejosh6751/Recency-Frequency-and-Monetary-Analysis/assets/148710647/61b64b67-8597-4251-b52b-dd0150d89e43)
+
 ```sql
--- RFM Customer Segmentation
+-- Create a View for RFM Customer Segments
 create view VWrfm_segments as
 	with CTEavg_rfm_scores as (
 			select
@@ -119,6 +123,8 @@ create view VWrfm_segments as
 -- Show View VWrfm_segments
 select * from VWrfm_segments;
 ```
+![VWrfm_segments](https://github.com/jakejosh6751/Recency-Frequency-and-Monetary-Analysis/assets/148710647/76b7cba6-a548-490b-99a8-9e4c757a23f5)
+
 ```sql
 -- Get customer counts and percentage for different categories of segmentation
 select 
@@ -130,13 +136,17 @@ from VWrfm_segments
 group by rfm_segment
 order by customer_count desc;
 ```
+![Get customer counts and percentage for different categories of segmentation](https://github.com/jakejosh6751/Recency-Frequency-and-Monetary-Analysis/assets/148710647/e3e5fb90-5053-44fd-b9dc-d9117a40a052)
+
 ```sql
--- Most Recent customers with high Frequency and Monetary Scores.
+-- Most Recent customers with high Frequency and Monetary Scores
 select *
 from VWrfm_scores
 where R>=4 and F>=4 and M >=4
 order by R desc;
 ```
+![Most Recent customers with high Frequency and Monetary Scores](https://github.com/jakejosh6751/Recency-Frequency-and-Monetary-Analysis/assets/148710647/ce3dbbc3-bb7d-4477-9150-34593b676e68)
+
 ```sql
 -- Most Profitable Customers
 select *
@@ -144,6 +154,8 @@ from VWrfm_scores
 where M=5
 order by monetary_score desc;
 ```
+![Most Profitable Customers](https://github.com/jakejosh6751/Recency-Frequency-and-Monetary-Analysis/assets/148710647/ad85bf46-c639-4ae4-91b6-66cb6ba2c396)
+
 ## Insights:
 1. 70% of our customers make up the average, valuable and most valuable rfm categories. 8% are considered 'at risk' customers.
 2. We have 7 highly esteemed customers with Recency, Frequency, and Monetary designation of 4 and 5. These customers should never be lost.
