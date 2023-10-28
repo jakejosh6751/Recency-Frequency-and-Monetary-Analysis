@@ -1,6 +1,8 @@
 # Recency, Frequency, and Monetary (RFM) Analysis
 ![rfm](https://github.com/jakejosh6751/Recency-Frequency-and-Monetary-Analysis/assets/148710647/3bbd5413-e427-4cb7-9495-e57a1f809e5b)
 
+![]
+
 ### Project Overview:
 This data analysis project seeks to segment customers base on their latest transaction dates, the rate of transactions, and their profitability to the business. The major concern is to gain actionable insights into the customer base to know the most profitable, loyal and most recent customers to enhance marketing and customer relationship strategies.
 ### Data Source:
