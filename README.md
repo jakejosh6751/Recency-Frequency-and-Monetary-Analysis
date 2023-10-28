@@ -13,6 +13,7 @@ Microsoft SQL Server Management Studio, String, Date, Math/Numeric, Aggregate & 
 select * from sales_data;
 ```
 ![dataset](https://github.com/jakejosh6751/Recency-Frequency-and-Monetary-Analysis/assets/148710647/da7e2ac4-a825-4aff-aa07-433427367193)
+
 ```sql
 -- Null Values = 0
 select
