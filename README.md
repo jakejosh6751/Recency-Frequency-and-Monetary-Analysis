@@ -163,4 +163,4 @@ order by monetary_score desc;
 2. We have 7 highly esteemed customers with Recency, Frequency, and Monetary designation of 4 and 5. These customers should never be lost.
 3. Our most profitable customers with Monetary designation of 5 happen to be the most loyal (frequent) with F designation between 3 and 5.
 
-![see all sql queries here](rfm_analysis.sql)
+![see complete sql queries here](rfm_analysis.sql)
